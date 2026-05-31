@@ -11,10 +11,12 @@ async def main():
         base_url=os.getenv("OLLAMA_ENDPOINT", "http://localhost:11434/v1/"),
         model=os.getenv("OLLAMA_MODEL", "llama3.2:3b")
     ).as_agent(
-        name="HelpfulAssistant",
-        instructions="You are a helpful assistant running locally via Ollama.",
+
+        name="Asistente medico IA",
+        instructions="""Eres un asistente medico local que responde preguntas sobre medicina general y enfermedades comunes. 
+        Quiero que respondas con un lenguaje claro, que desglose la respuesta en pasos y que sea facil de entender para un paciente. y que te bases en los sintomas que el paciente te proporciona.  La respuesta la vas a estructurar en un json con las siguientes claves: 'sintomas', 'diagnostico', 'tratamiento', 'prevencion' """,
     )
-    consulta = input("Enter your question: ")
+    consulta = input("Ingrese tu pregunta o sintomas del paciente: ")
     result = await agent.run(consulta)
     print(result)
 

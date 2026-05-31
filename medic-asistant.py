@@ -3,13 +3,16 @@
 
 import asyncio
 import os
+from dotenv import load_dotenv
 from agent_framework.openai import OpenAIChatClient
+
+load_dotenv()
 
 async def main():
     agent = OpenAIChatClient(
-        api_key="ollama",  # Placeholder, Ollama doesn't require an API key
-        base_url=os.getenv("OLLAMA_ENDPOINT", "http://localhost:11434/v1/"),
-        model=os.getenv("OLLAMA_MODEL", "llama3.2:3b")
+        api_key=os.getenv("LLM_API_KEY", "ollama"),
+        base_url=os.getenv("LLM_ENDPOINT", "http://localhost:11434/v1/"),
+        model=os.getenv("LLM_MODEL", "llama3.2:3b")
     ).as_agent(
 
         name="Asistente medico IA",
